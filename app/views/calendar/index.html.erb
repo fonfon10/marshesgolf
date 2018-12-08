@@ -1,0 +1,87 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Today's Reservations</h1>
+
+<%= @todayreservations[0].day %>
+
+
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Timeslot</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @timeslots.each do |timeslot| %>
+
+    <tr>
+
+    <td> <%= timeslot.start %> </td>   
+
+
+
+    <td><% if @todayreservations.where('id = ?', timeslot.id) != nil%> 
+      <%= timeslot.start %>
+    <% end %>
+
+
+
+
+    </td>
+
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Timeslot</th>
+      <th>Member</th>
+      <th>Activity</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @todayreservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.timeslot.start %></td>
+        <td><%= reservation.member.email %></td>
+        <td><%= reservation.activity.name %></td>
+
+
+
+
+
+
+        <td><%= link_to 'Show', reservation %></td>
+        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
+        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reservation', new_reservation_path %>
