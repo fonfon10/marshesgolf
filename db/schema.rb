@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181208054858) do
+ActiveRecord::Schema.define(version: 20181208225538) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -50,6 +50,12 @@ ActiveRecord::Schema.define(version: 20181208054858) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "days", force: :cascade do |t|
+    t.date "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "members", force: :cascade do |t|
     t.string "name"
     t.integer "age_group_id"
@@ -76,7 +82,7 @@ ActiveRecord::Schema.define(version: 20181208054858) do
     t.integer "timeslot_id"
     t.integer "member_id"
     t.integer "activity_id"
-    t.date "day"
+    t.integer "day_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -32,8 +32,14 @@
 
 
           <li>
-          <%= link_to edit_member_registration_path(current_member) do %>
-              <i class="glyphicon glyphicon-cog "></i>Profile
+          <% if current_member.membership.name == 'Admin' %>
+            <%= link_to edit_member_registration_path(current_member) do %>
+                <i class="glyphicon glyphicon-cog "></i>Profile
+            <% end %>
+          <% end %>
+
+          <%= link_to days_path do %>
+              <i class="glyphicon glyphicon-calendar "></i>Calendar
           <% end %>
           </li>
           <li>
@@ -45,11 +51,7 @@
 
 
         <% else %>
-          <li>
-          <%= link_to new_member_registration_path do %>
-              <i class="glyphicon glyphicon-user "></i> Sign Up
-          <% end %>
-          </li>
+
           <li>
           <%= link_to new_member_session_path do %>
               <i class="glyphicon glyphicon-log-in "></i> Log In

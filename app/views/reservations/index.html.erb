@@ -5,10 +5,12 @@
 <table>
   <thead>
     <tr>
+      <th>Cancel</th>
       <th>Timeslot</th>
       <th>Member</th>
       <th>Activity</th>
       <th>Day</th>
+      <th>Book</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +18,12 @@
   <tbody>
     <% @reservations.each do |reservation| %>
       <tr>
+        <td><%= link_to 'cancel', cancel_reservation_path(reservation) %></td>        
         <td><%= reservation.timeslot.start %></td>
         <td><%= reservation.member.email %></td>
         <td><%= reservation.activity.name %></td>
-        <td><%= reservation.day %></td>
+        <td><%= reservation.day.name %></td>
+        <td><%= link_to 'Book', book_reservation_path(reservation) %></td>
         <td><%= link_to 'Show', reservation %></td>
         <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
         <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>

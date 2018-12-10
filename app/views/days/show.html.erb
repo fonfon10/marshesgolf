@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<% thisday = @reservations[0].day.name %>
+
+
+<h1>Reservations <%= thisday.strftime("%d-%m") %></h1>
+
+
+<div></div>
+
+
+<div>
+<table class="table-striped" >
+  <thead>
+    <tr>
+      <th>Cancel</th>
+      <th>Timeslot</th>
+      <th>Member</th>
+      <th>Activity</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+      	<% if reservation.member == current_member  %>
+
+          <td> <%= link_to cancel_reservation_path(reservation) do %>
+                <i class="glyphicon glyphicon-trash "></i>    
+            <% end %>   
+
+
+
+	      <% else %>
+	      	<td></td>
+	      <% end %>
+
+        <td><%= reservation.timeslot.start.strftime("%H:%M") %></td>
+
+        <% if reservation.member.membership.name == 'Operator' %>
+	        <td> <%= link_to book_lesson_reservation_path(reservation) do %>
+	              <i class="glyphicon glyphicon-plus "></i>Lesson    
+	          <% end %>   
+
+            <i>  |  </i>   
+
+              <%= link_to book_practice_reservation_path(reservation) do %>
+                <i class="glyphicon glyphicon-plus "></i>Practice  
+            <% end %>
+
+					</td>
+				<% else %>
+	        <td><%= reservation.member.email %></td>
+	       <% end %>
+
+        <% if reservation.activity.name != 'Open'  %>
+          <td><%= reservation.activity.name %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+<div></div>
+
+<br><br><br>
+

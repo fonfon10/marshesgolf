@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
-  resources :reservations
+  resources :days 
+
+
+  resources :reservations do
+    member do
+      get 'book_lesson'
+      get 'book_practice'
+      get 'cancel'
+    end
+  end
   get 'calendar/index'
 
   resources :activities
@@ -12,7 +21,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root to: "calendar#index"
+  root to: "days#index"
 
 
 end

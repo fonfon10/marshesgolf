@@ -16,21 +16,49 @@
     </tr>
   </thead>
 
+
+
+  <% @timeslots.each do |t| %>
+
+      <%= puts t.id  %>
+      <%= puts t.start  %>
+
+  <% end %>
+
+<% @todayreservations.each do |t| %>
+
+      <%= puts t.timeslot_id  %>
+
+  <% end %>
+
+
+
   <tbody>
-    <% @timeslots.each do |timeslot| %>
+
+    <% ts = 0  %>
+
+
+    <% @timeslots.each do |t| %>
 
     <tr>
 
-    <td> <%= timeslot.start %> </td>   
+      <% todayreservation = @todayreservations[1]  %>
+
+      <% if t.id == todayreservation.timeslot_id  %>
+
+        <td> <%= t.start %> </td>   
+        <td> <%= todayreservation.member.email %> 
 
 
-
-    <td><% if @todayreservations.where('id = ?', timeslot.id) != nil%> 
-      <%= timeslot.start %>
-    <% end %>
+        <% ts =+ 3 %>
+        <%= puts "TS = "+ ts.to_s %>
 
 
+      <% else %>
+        <td> <%= t.start %> </td>   
+        <td> <p> BLANK</p></td>
 
+      <% end %>
 
     </td>
 
@@ -45,42 +73,6 @@
 
 
 
-
-
-
-
-
-
-
-<table>
-  <thead>
-    <tr>
-      <th>Timeslot</th>
-      <th>Member</th>
-      <th>Activity</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @todayreservations.each do |reservation| %>
-      <tr>
-        <td><%= reservation.timeslot.start %></td>
-        <td><%= reservation.member.email %></td>
-        <td><%= reservation.activity.name %></td>
-
-
-
-
-
-
-        <td><%= link_to 'Show', reservation %></td>
-        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <br>
 
