@@ -4,7 +4,7 @@ class CreateReservations < ActiveRecord::Migration[5.1]
       t.integer :timeslot_id
       t.integer :member_id
       t.integer :activity_id
-      t.date :day
+      t.integer :day_id
 
       t.timestamps
     end
