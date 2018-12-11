@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
     <head>
       <!-- Required meta tags always come first -->
       <meta charset="utf-8">
@@ -9,11 +11,14 @@
       <title>MarshesGolf</title>
 
       <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-eval' => true %>
+
       <%= csrf_meta_tags %>
 
     </head>
     <body>
+
+
     <%= render 'layouts/navbar'  %>
 
 

@@ -39,15 +39,12 @@
         <td><%= reservation.timeslot.start.strftime("%H:%M") %></td>
 
         <% if reservation.member.membership.name == 'Operator' %>
-	        <td> <%= link_to book_lesson_reservation_path(reservation) do %>
-	              <i class="glyphicon glyphicon-plus "></i>Lesson    
-	          <% end %>   
+
+          <td> <%= link_to 'Lesson', book_lesson_reservation_path(reservation), data: { confirm: 'Are you sure?' }, data-turbolinks="false",class: "btn btn-danger"%>
 
             <i>  |  </i>   
 
-              <%= link_to book_practice_reservation_path(reservation) do %>
-                <i class="glyphicon glyphicon-plus "></i>Practice  
-            <% end %>
+           <%= link_to 'Practice', book_lesson_reservation_path(reservation),  data: { confirm: "Are you sure?" },class: "btn btn-warning" %>
 
 					</td>
 				<% else %>
@@ -68,6 +65,13 @@
 
 
 <div></div>
+
+
+<a href="#" data-confirm="Are you sure?" data-text="Are you sure you want to do
+this?">Click Me</a>
+
+
+
 
 <br><br><br>
 
