@@ -28,8 +28,17 @@
     text-align:center;
     background: lightgrey;
     color: white; 
-    font-size: 1.2em }
+    font-size: 1.2em ;
+    }
+  td {
+
+    vertical-align: middle;
+  }
+
+
+
 }
+
 
 
 
@@ -66,8 +75,12 @@ a {
 .jumbotron {
   text-align: center;
 }
+
 table {
   text-align: center;
+  color: black;
+  border: 1px solid black;
+
 }
 .current-1 span{
 color:red;  }
@@ -152,33 +165,4 @@ li {
       margin: 0 0 2.5rem 0;
       color: #a7a8a8;
     }
-}
-
-.testimonial {
-  text-align: center;
-  font-size: 1.5rem;
-  color: #afb0b0;
-  padding: 3.5rem 0;
-  .quote {
-    margin: 0 0 .5rem 0;
-  }
-  .name {
-    color: #2B2E2E;
-    margin: 0;
-    font-size: .85rem;
-  }
-}
-
-
-
-.footer {
-  background: #2B2E2E;
-  width: 100%;
-  padding: 2rem 0;
-  color: #FFF;
-  text-align: center;
-  p {
-    margin: 0;
-    font-size: .85rem;
-  }
 }
