@@ -89,6 +89,7 @@ Member.create!(email: 'serge@serge.com', password: 'numb10', password_confirmati
 	@timeslots.each do |t|
 		Reservation.create!(timeslot: t, member: m, day: d, activity: activity_type_open, bay: 1 )
 		Reservation.create!(timeslot: t, member: m, day: d, activity: activity_type_open, bay: 2 )
+		sleep(1)
 	end
 end	
 
