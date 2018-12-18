@@ -3,7 +3,7 @@
 <% thisday = @reservations[0].day.name %>
 
 
-<h1>Reservations <%= thisday.strftime("%d-%m") %></h1>
+<h1>Reservations <%= thisday.strftime("%d-%^b-%y") %></h1>
 
 
 <div style="float: left">
@@ -12,110 +12,123 @@
 
   <thead>
     <tr> 
-      <td colspan="4"> BAY #1</td>
+      <td colspan="4" style="border-right: 1px solid black"> BAY #1</td>
+      <td ></td>
+      <td colspan="4"> BAY #2</td>
     </tr>
     <tr>
-      <th>Cancel</th>
-      <th>Timeslot</th>
-      <th>Member</th>
+      <% if member_signed_in? %>
+        <th>Cancel</th>
+      <% else %>
+        <th></th>
+      <% end %>
+
+      <th>Time</th>
+
+      <% if member_signed_in? %>
+        <th>Member</th>
+      <% else %>
+        <th></th>
+      <% end %>
+
+      <th style="border-right: 1px solid black">Activity</th>
+      <th></th>
+      <% if member_signed_in? %>
+        <th>Cancel</th>
+      <% else %>
+        <th></th>
+      <% end %>
+      
+      <th>Time</th>
+      <% if member_signed_in? %>
+        <th>Member</th>
+      <% else %>
+        <th></th>
+      <% end %>
       <th>Activity</th>
     </tr>
   </thead>
   
   <tbody>
-    <% @reservations.each do |reservation| %>
-      <tr>
-      	<% if reservation.member == current_member  %>
+        <tr>
+        <% @reservations.each_with_index do |reservation, i| %>
+        	<% if reservation.member == current_member or (current_member.membership.name == 'Operator' and reservation.activity.name != 'Open')%>
 
-          <td> <%= link_to cancel_reservation_path(reservation) do %>
-                <i class="glyphicon glyphicon-trash "></i>    
-            <% end %>   
+            <td> <%= link_to cancel_reservation_path(reservation) do %>
+                  <i class="glyphicon glyphicon-trash "></i>    
+              <% end %>   
 
-	      <% else %>
-	      	<td></td>
-	      <% end %>
+  	      <% else %>
+  	      	<td></td>
+  	      <% end %>
 
-        <td><%= reservation.timeslot.start.strftime("%H:%M") %></td>
 
-        <% if reservation.member.membership.name == 'Operator' %>
+          <td><%= reservation.timeslot.start.strftime("%H:%M") %></td>
 
-          <td> <%= link_to 'Lesson', book_lesson_reservation_path(reservation), data: { confirm: "Are you sure?" } ,class: "btn btn-danger"%>
+          <% if member_signed_in? %>        
 
-            <i>  |  </i>   
+            <% if reservation.activity.name != 'Open'  %>
+                  
+              <td><%= reservation.member.email %></td>
 
-           <%= link_to 'Practice', book_practice_reservation_path(reservation),  data: { confirm: "Are you sure?" },class: "btn btn-warning" %>
+<!--              <td><%= @reservations[i].member == current_member %></td>
+-->
 
-					</td>
-				<% else %>
-	        <td><%= reservation.member.email %></td>
-	       <% end %>
+            <% else %>
 
-        <% if reservation.activity.name != 'Open'  %>
-          <td><%= reservation.activity.name %></td>
-        <% else %>
+              <% if i.even? %>
+                <% if ((@reservations[i+1].member != current_member) and (@count_reservations.to_i < 2)) %>
+                  <td>             
+                    <%= link_to 'Lesson', book_lesson_reservation_path(reservation),class: "btn btn-danger"%>
+                    
+                    <% if @reservations[i+1].activity.name != 'Open' %>                      
+                      <i>  |  </i>   
+                      <%= link_to 'Practice', book_practice_reservation_path(reservation),class: "btn btn-warning" %>
+                    <% end %>
+                  </td>
+                <% else %>
+                  <td></td>
+                <% end %>
+              <% end %>
+
+
+
+              <% if i.odd? %>
+                <% if ((@reservations[i-1].member != current_member) and (@count_reservations.to_i < 2)) %>
+                  <td>             
+                    <%= link_to 'Practice', book_practice_reservation_path(reservation),class: "btn btn-warning" %>
+                  </td>
+                <% else %>
+                  <td></td>
+                <% end %>
+              <% end %>
+
+            <% end %>
+
+
+
+
+          <% end %>    
+            
+
+          <% if reservation.activity.name != 'Open'  %>
+            <td style="border-right: 1px solid black;"><%= reservation.activity.name %></td>
+          <% else %>
+            <td style="border-right: 1px solid black"></td>
+          <% end %>
+
           <td></td>
-        <% end %>
 
-      </tr>
+
+      <% if reservation.bay == 2 %>
+
+        </tr>
+      <% end %>
+
     <% end %>
   </tbody>
 </table>
 </div>
 
 
-   <div style="float: left">
 
-<table class="table-striped">
-
-  <thead>
-    <tr> 
-      <td colspan="4"> BAY #1</td>
-    </tr>
-    <tr>
-      <th>Cancel</th>
-      <th>Timeslot</th>
-      <th>Member</th>
-      <th>Activity</th>
-    </tr>
-  </thead>
-  
-  <tbody>
-    <% @reservations.each do |reservation| %>
-      <tr>
-        <% if reservation.member == current_member  %>
-
-          <td> <%= link_to cancel_reservation_path(reservation) do %>
-                <i class="glyphicon glyphicon-trash "></i>    
-            <% end %>   
-
-        <% else %>
-          <td></td>
-        <% end %>
-
-        <td ><%= reservation.timeslot.start.strftime("%H:%M") %></td>
-
-        <% if reservation.member.membership.name == 'Operator' %>
-
-          <td> <%= link_to 'Lesson', book_lesson_reservation_path(reservation),class: "btn btn-danger"%>
-
-            <i>  |  </i>   
-
-           <%= link_to 'Practice', book_practice_reservation_path(reservation),class: "btn btn-warning" %>
-
-          </td>
-        <% else %>
-          <td><%= reservation.member.email %></td>
-         <% end %>
-
-        <% if reservation.activity.name != 'Open'  %>
-          <td><%= reservation.activity.name %></td>
-        <% else %>
-          <td></td>
-        <% end %>
-
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-</div>

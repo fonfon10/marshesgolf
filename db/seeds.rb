@@ -76,9 +76,10 @@ activity_type_closed = Activity.last
 
 
 Member.create!(email: 'slafontaine10@gmail.com', password: 'numb10', password_confirmation: 'numb10', membership: membership_type_Admin, age_group: age_group_type_adult)
-m = Member.create!(email: 'serge@serge.com', password: 'numb10', password_confirmation: 'numb10', membership: membership_type_Operator, age_group: age_group_type_adult)
+m = Member.create!(email: 'xx@xxx.com', password: 'numb10', password_confirmation: 'numb10', membership: membership_type_Operator, age_group: age_group_type_adult)
 Member.create!(email: 'ashley@gmail.com', password: 'numb10', password_confirmation: 'numb10', membership: membership_type_Coaching, age_group: age_group_type_junior)
 Member.create!(email: 'derek.macdonald@marshesgolfclub.com', password: 'golf123', password_confirmation: 'golf123', membership: membership_type_Coaching, age_group: age_group_type_adult)
+Member.create!(email: 'serge@serge.com', password: 'numb10', password_confirmation: 'numb10', membership: membership_type_Operator, age_group: age_group_type_adult)
 
 
 @days = Day.all
@@ -86,7 +87,8 @@ Member.create!(email: 'derek.macdonald@marshesgolfclub.com', password: 'golf123'
 
 @days.each do |d|
 	@timeslots.each do |t|
-		Reservation.create!(timeslot: t, member: m, day: d, activity: activity_type_open )
+		Reservation.create!(timeslot: t, member: m, day: d, activity: activity_type_open, bay: 1 )
+		Reservation.create!(timeslot: t, member: m, day: d, activity: activity_type_open, bay: 2 )
 	end
 end	
 

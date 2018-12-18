@@ -1,14 +1,22 @@
 Rails.application.routes.draw do
+
+
+
   resources :days 
 
-
   resources :reservations do
-    member do
-      get 'book_lesson'
-      get 'book_practice'
-      get 'cancel'
+      member do
+        get 'book_lesson'
+        get 'book_practice'
+        get 'cancel'
+      end
     end
-  end
+  
+  
+
+
+
+
   get 'calendar/index'
 
   resources :activities

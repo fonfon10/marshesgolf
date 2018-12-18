@@ -18,7 +18,7 @@ def create
   @reservation.member_id = current_member.id
   puts @reservation.member_id
   @reservation.activity_id = params[:activity_id]
-puts @activity_id
+  @reservation.bay = params[:bay]
 
 
 
@@ -30,6 +30,13 @@ puts @activity_id
   
 end
 
+
+
+def show
+  day = Day.find(params[:id])
+  @reservations = Reservation.where('day_id = ?', day.id).order(timeslot_id: :asc)
+  
+end
 
 
 
@@ -81,7 +88,7 @@ end
   private
 
     def reservation_params
-      params.require(:reservation).permit(:timeslot_id, :member_id, :activity_id, :day)
+      params.require(:reservation).permit(:timeslot_id, :member_id, :activity_id, :day, :bay)
     end
 end
 
