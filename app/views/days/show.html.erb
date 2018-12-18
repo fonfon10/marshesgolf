@@ -12,7 +12,7 @@
 
   <thead>
     <tr> 
-      <td colspan="4" style="border-right: 1px solid black"> BAY #1</td>
+      <td colspan="4"> BAY #1</td>
       <td ></td>
       <td colspan="4"> BAY #2</td>
     </tr>
@@ -31,7 +31,7 @@
         <th></th>
       <% end %>
 
-      <th style="border-right: 1px solid black">Activity</th>
+      <th>Activity</th>
       <th></th>
       <% if member_signed_in? %>
         <th>Cancel</th>
@@ -112,9 +112,9 @@
             
 
           <% if reservation.activity.name != 'Open'  %>
-            <td style="border-right: 1px solid black;"><%= reservation.activity.name %></td>
+            <td ><%= reservation.activity.name %></td>
           <% else %>
-            <td style="border-right: 1px solid black"></td>
+            <td ></td>
           <% end %>
 
           <td></td>
