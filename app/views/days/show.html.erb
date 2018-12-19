@@ -54,7 +54,10 @@
         <% @reservations.each_with_index do |reservation, i| %>
         	<% if reservation.member == current_member or (current_member.membership.name == 'Operator' and reservation.activity.name != 'Open')%>
 
-            <td> <%= link_to 'x', cancel_reservation_path(reservation)  %>
+            <td> <%= link_to cancel_reservation_path(reservation)  do %> 
+                 <i class="glyphicon glyphicon-trash "></i>   
+                 <% end %> 
+            </td>
 
   	      <% else %>
   	      	<td></td>
