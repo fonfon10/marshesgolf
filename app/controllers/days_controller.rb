@@ -13,7 +13,8 @@ end
 def show
 
 	day = Day.find(params[:id])
-	@reservations = Reservation.where('day_id = ?', day.id)
+	@reservations = Reservation.where('day_id = ?', day.id).order(id: :asc)
+#	@reservations = r.order(id: :asc)
 #	cr = @reservations.where('member_id = ?', current_member.id)
 	if member_signed_in?
   	@count_reservations = @reservations.where('member_id = ?', current_member.id).count
