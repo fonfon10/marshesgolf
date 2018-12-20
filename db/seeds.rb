@@ -53,7 +53,7 @@ end
 
 
 #day
-day = Date.new(2018,12,27)
+day = Date.new(2018,12,20)
 lastday = Date.new(2019,03,31)
 
 while day <= lastday do

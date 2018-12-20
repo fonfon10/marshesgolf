@@ -9,6 +9,7 @@
   <thead>
     <tr>
       <th>Timeslot</th>
+      <th>Bay #</th>
       <th>Member</th>
       <th>Activity</th>
       <th colspan="1"></th>
@@ -19,6 +20,7 @@
     <% @reservations.each do |r| %>
       <tr>
         <td><%= r.timeslot.start.strftime("%H:%M") %></td>
+        <td><%= r.bay %></td>
         <% if r.member.lastname != "" %>        
           <td><%= r.member.lastname%>, <%= r.member.firstname %></td>
         <% else %>
