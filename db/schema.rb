@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181215220808) do
+ActiveRecord::Schema.define(version: 20181219035225) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(version: 20181215220808) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "name"
     t.integer "age_group_id"
     t.integer "membership_id"
     t.integer "lesson"
@@ -68,6 +67,8 @@ ActiveRecord::Schema.define(version: 20181215220808) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "firstname"
+    t.string "lastname"
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end

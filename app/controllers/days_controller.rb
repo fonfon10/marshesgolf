@@ -5,7 +5,16 @@ before_action :authenticate_member!
 
 def index
 #	@days = Day.first(7)
-@days = Day.where('name >= ?', Date.today).first(7)
+
+if Time.now.hour > 7
+	number_of_days = 7
+else
+	number_of_days = 6	
+end
+
+
+@days = Day.where('name >= ?', Date.today).first(number_of_days)
+#@days = Day.where('name >= ?', Date.today).first(7)
 		
 end
 
@@ -16,7 +25,7 @@ def show
 	@reservations = Reservation.where('day_id = ?', day.id).order(id: :asc)
 #	@reservations = r.order(id: :asc)
 #	cr = @reservations.where('member_id = ?', current_member.id)
-	if member_signed_in?
+	if member_signed_in? and current_member.membership.name != "Operator"
   	@count_reservations = @reservations.where('member_id = ?', current_member.id).count
 	end	
 #  @count_reservations = cr.count

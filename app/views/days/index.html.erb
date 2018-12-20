@@ -5,6 +5,7 @@
 <table class="table-striped"  >
   <thead>
     <tr>
+      <th>Day</th>
       <th>Date</th>
       <th colspan="3"></th>
     </tr>
@@ -13,7 +14,17 @@
   <tbody>
     <% @days.each do |day| %>
       <tr>
+        <td><%= day.name.strftime("%A") %></td>
         <td><%= link_to day.name, day %></td>
+
+        <% if day.name.sunday? %>
+          <tr>
+            <td> Monday </td>
+            <td> Closed </td>
+          </tr>
+          
+        <% end %>
+
       </tr>
     <% end %>
   </tbody>

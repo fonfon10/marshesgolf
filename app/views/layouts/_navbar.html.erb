@@ -64,7 +64,7 @@
     <div>
 
       <% if member_signed_in?  %>
-        <p><%= current_member.email %></p>
+        <p><%= current_member.firstname %> <%= current_member.lastname %></p>
         <p><%= current_member.membership.name %></p>
       <% end %>
     </div>

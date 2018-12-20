@@ -3,7 +3,7 @@
 <% thisday = @reservations[0].day.name %>
 
 
-<h1>Reservations <%= thisday.strftime("%d-%^b-%y") %></h1>
+<h1>Reservations <%= thisday.strftime("%A/%d-%^b-%y") %></h1>
 
 
 <div style="float: left">
@@ -70,7 +70,7 @@
 
             <% if reservation.activity.name != 'Open'  %>
                   
-              <td><%= reservation.member.email %></td>
+              <td><%= reservation.member.firstname[0] %><%= reservation.member.lastname %></td>
 
 <!--              <td><%= @reservations[i].member == current_member %></td>
 -->
@@ -78,11 +78,13 @@
             <% else %>
 
               <% if i.even? %>
-                <% if ((@reservations[i+1].member != current_member) and (@count_reservations.to_i < 2)) %>
-                  <td>             
-                    <%= link_to 'Lesson', book_lesson_reservation_path(reservation),class: "btn btn-danger"%>
-                    
-                    <% if @reservations[i+1].activity.name != 'Open' %>                      
+                <% if ((@reservations[i+1].member != current_member) and (@count_reservations.to_i < 2))  and current_member.membership.name != 'Operator'%>
+                  <td>
+                    <% if reservation.timeslot.start.hour > 11 or (reservation.day.name.sunday? and reservation.timeslot.start.hour >10)  %>             
+                      <%= link_to 'Lesson', book_lesson_reservation_path(reservation),class: "btn btn-danger"%>
+                    <% end %>
+                      
+                    <% if @reservations[i+1].activity.name != 'Open' or reservation.timeslot.start.hour <= 11  %>                      
                       <i>  |  </i>   
                       <%= link_to 'Practice', book_practice_reservation_path(reservation),class: "btn btn-warning" %>
                     <% end %>
@@ -95,7 +97,7 @@
 
 
               <% if i.odd? %>
-                <% if ((@reservations[i-1].member != current_member) and (@count_reservations.to_i < 2)) %>
+                <% if ((@reservations[i-1].member != current_member) and (@count_reservations.to_i < 2) and current_member.membership.name != 'Operator') %>
                   <td>             
                     <%= link_to 'Practice', book_practice_reservation_path(reservation),class: "btn btn-warning" %>
                   </td>
