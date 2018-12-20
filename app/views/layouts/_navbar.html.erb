@@ -25,9 +25,19 @@
           <%= link_to activities_path do %>
               <i class="glyphicon glyphicon-plus "></i>Activities
           <% end %>
+
           </li>
 
         <% end %>  
+
+
+        <% if current_member.membership.name == 'Admin' or current_member.membership.name == 'Operator' %>
+        <li>
+          <%= link_to reservations_path do %>
+              <i class="glyphicon glyphicon-plus "></i>Reservations
+          <% end %>
+        </li>          
+        <% end %>
 
 
 
@@ -42,6 +52,7 @@
               <i class="glyphicon glyphicon-calendar "></i>Calendar
           <% end %>
           </li>
+
           <li>
           <%= link_to destroy_member_session_path, method: :delete do %>
               <i class="glyphicon glyphicon-log-out "></i> Log Out

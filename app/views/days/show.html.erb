@@ -3,7 +3,12 @@
 <% thisday = @reservations[0].day.name %>
 
 
-<h1>Reservations <%= thisday.strftime("%A/%d-%^b-%y") %></h1>
+
+<h1>Reservations <%= thisday.strftime("%A/%d-%^b-%y") %>   </h1>
+
+<% if current_member.membership.name == "Admin" %>
+   <td> <%= link_to '>>>', @nextDay %> </td>
+<% end %>
 
 
 <div style="float: left">
@@ -63,8 +68,13 @@
   	      	<td></td>
   	      <% end %>
 
+          <% if current_member.membership.name == "Admin" or current_member.membership.name == "Operator" %>
+            <td> <%= link_to reservation.timeslot.start.strftime("%H:%M"), edit_reservation_path(reservation) %> </td>
+            
+          <% else %>
+            <td><%= reservation.timeslot.start.strftime("%H:%M") %></td>
+          <% end %>
 
-          <td><%= reservation.timeslot.start.strftime("%H:%M") %></td>
 
           <% if member_signed_in? %>        
 

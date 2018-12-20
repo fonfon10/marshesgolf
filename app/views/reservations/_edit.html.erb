@@ -15,10 +15,15 @@
 
 
   <div class="field">
-    <%= form.label :timeslot %>
-    <%= form.select(:timeslot_id, @timeslots)%>
-    
+    <%= form.label :day %>
+    <%= @reservation.day.name%>    
   </div>
+  <div class="field">
+    <%= form.label :timeslot %>
+    <%= @reservation.timeslot.start.hour%>:    
+  </div>
+
+
   <div class="field">
     <%= form.label :activity %>
     <%= form.select(:activity_id, @activities)%>
@@ -26,10 +31,10 @@
   </div>
 
 
-
   <div class="field">
-    <%= form.label :day %>
-    <%= form.date_select :day, id: :reservation_day %>
+    <%= form.label :members %>
+    <%= form.select(:member_id, @members)%>
+    
   </div>
 
   <div class="actions">

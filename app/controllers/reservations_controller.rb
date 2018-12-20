@@ -31,33 +31,47 @@ def create
 end
 
 
+def index
+  @days = Day.all  
+end
+
 
 def show
   day = Day.find(params[:id])
   @reservations = Reservation.where('day_id = ?', day.id).order(timeslot_id: :asc)
-  
 end
 
 
 
 def book_lesson
   @reservation = Reservation.find(params[:id])
-  @reservation.update(member: current_member)
-  activity_type_lesson = Activity.find_by name: 'Lesson'
-  @reservation.update(activity: activity_type_lesson)
 
-  @reservation.save
-  redirect_to days_path
+  if @reservation.activity.name == 'Open'
+
+    @reservation.update(member: current_member)
+    activity_type_lesson = Activity.find_by name: 'Lesson'
+    @reservation.update(activity: activity_type_lesson)
+
+    @reservation.save
+    redirect_to days_path, notice: 'Lesson Successfully Booked' 
+  else
+    redirect_to days_path, notice: 'Lesson already taken' 
+  end
+
 end
 
 def book_practice
-  @reservation = Reservation.find(params[:id])
-  @reservation.update(member: current_member)
-  activity_type_lesson = Activity.find_by name: 'Practice'
-  @reservation.update(activity: activity_type_lesson)
+  if @reservation.activity.name == 'Open'
+    @reservation = Reservation.find(params[:id])
+    @reservation.update(member: current_member)
+    activity_type_lesson = Activity.find_by name: 'Practice'
+    @reservation.update(activity: activity_type_lesson)
 
-  @reservation.save
-  redirect_to days_path
+    @reservation.save
+    redirect_to days_path, notice: 'Practice Successfully Booked'
+  else
+    redirect_to days_path, notice: 'Practice already taken' 
+  end
 end
 
 
@@ -70,15 +84,20 @@ def cancel
   @reservation.update(member: m)
   @reservation.update(activity: activity_type_lesson)
   @reservation.save
-  redirect_to days_path
+  redirect_to days_path,  notice: 'Lesson/Practice Successfully Cancelled'
 end
 
 
 
 def edit
   @reservation = Reservation.find(params[:id])
-  @timeslots = Timeslot.order('start ASC').map { |i| [i.start, i.id]}
+
+
+
+
+#  @timeslots = Timeslot.order('start ASC').map { |i| [i.start, i.id]}
   @activities = Activity.order('name ASC').map { |i| [i.name, i.id]}
+  @members = Member.order('lastname ASC').map { |i| [i.lastname+', '+i.firstname, i.id]}
 
 end
 

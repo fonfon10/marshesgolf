@@ -6,7 +6,7 @@ before_action :authenticate_member!
 def index
 #	@days = Day.first(7)
 
-if Time.now.hour > 7
+if Time.now.hour > 12 #for heroku timezone
 	number_of_days = 7
 else
 	number_of_days = 6	
@@ -20,6 +20,10 @@ end
 
 
 def show
+	nextDay = params[:id].to_i+1
+
+  @nextDay = Day.find(nextDay)
+
 
 	day = Day.find(params[:id])
 	@reservations = Reservation.where('day_id = ?', day.id).order(id: :asc)

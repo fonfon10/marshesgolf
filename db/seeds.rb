@@ -80,7 +80,7 @@ activity_type_closed = Activity.last
 
 
 #Member.create!(email: 'slafontaine10@gmail.com', password: 'numb10', password_confirmation: 'numb10', membership: membership_type_Admin, age_group: age_group_type_adult)
-m = Member.create!(firstname: '', lastname: '', email: 'derek.macdonald@marshesgolfclub.com', password: 'numb10', password_confirmation: 'numb10', membership: membership_type_Operator, age_group: age_group_type_adult)
+m = Member.create!(firstname: '', lastname: '', email: 'derek.macdonald@marshesgolfclub.com', password: 'MarshesRocks', password_confirmation: 'MarshesRocks', membership: membership_type_Operator, age_group: age_group_type_adult)
 #Member.create!(email: 'ashley@gmail.com', password: 'numb10', password_confirmation: 'numb10', membership: membership_type_Coaching, age_group: age_group_type_junior)
 #Member.create!(email: 'derek.macdonald@marshesgolfclub.com', password: 'golf123', password_confirmation: 'golf123', membership: membership_type_Coaching, age_group: age_group_type_adult)
 #Member.create!(email: 'serge@serge.com', password: 'numb10', password_confirmation: 'numb10', membership: membership_type_Operator, age_group: age_group_type_adult)
@@ -108,7 +108,7 @@ members = [["Maddy","Pytura","michaelpytura@gmail.com","golf123",membership_type
 ["Adam ","MacRae","adam-macrae@hotmail.com","golf123",membership_type_Coaching,age_group_type_adult],
 ["Ammie","Fu","fyhammie@hotmail.com ","golf123",membership_type_Coaching,age_group_type_adult],
 ["Jeffrey","Zheng","abcd1@xxx.com","golf123",membership_type_Coaching,age_group_type_adult],
-["Serge","Lafontaine","slafontaine10@gmail.com","golf123",membership_type_Admin,age_group_type_adult],
+["Serge","Lafontaine","slafontaine10@gmail.com","numb10",membership_type_Admin,age_group_type_adult],
 ["Ellis","Kinnaird","breakinnaird@gmail.com","golf123",membership_type_Coaching,age_group_type_adult],
 ["Bruce ","Hiscock","can6180@shaw.ca","golf123",membership_type_Coaching,age_group_type_adult],
 ["Kathleen","Parker","rkparker@pgonline.com","golf123",membership_type_Coaching,age_group_type_adult],
@@ -161,4 +161,4 @@ end
 end	
 
 
-AdminUser.create!(email: 'admin@admin.com', password: 'numb10', password_confirmation: 'numb10')
+AdminUser.create!(email: 'slafontaine10@gmail.com', password: 'numb10', password_confirmation: 'numb10')
