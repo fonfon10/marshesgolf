@@ -61,8 +61,8 @@ def book_lesson
 end
 
 def book_practice
-  if @reservation.activity.name == 'Open'
     @reservation = Reservation.find(params[:id])
+  if @reservation.activity.name == 'Open'
     @reservation.update(member: current_member)
     activity_type_lesson = Activity.find_by name: 'Practice'
     @reservation.update(activity: activity_type_lesson)
