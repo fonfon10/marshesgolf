@@ -98,7 +98,8 @@ m = Member.create!(firstname: '', lastname: '', email: 'derek.macdonald@marshesg
 
 
 members = [["Maddy","Pytura","michaelpytura@gmail.com","golf123",membership_type_Coaching,age_group_type_junior],
-["Stephan","du Plooy","cdplooy@gmail.com","golf123",membership_type_Coaching,age_group_type_junior],
+["Stephan","du Plooy","sdpphotography1@gmail.com","golf123",membership_type_Coaching,age_group_type_junior],
+["Jaco","du Plooy","cdplooy@gmail.com","golf123",membership_type_Coaching,age_group_type_adult],
 ["Ashley","Lafontaine","ashleylafontaine27@gmail.com","golf123",membership_type_Coaching,age_group_type_junior],
 ["Ian ","Clark","iclark@marks-clerk.ca","golf123",membership_type_Coaching,age_group_type_adult],
 ["Doug","Hewson","dhewson@portlandpe.com","golf123",membership_type_Coaching,age_group_type_adult],

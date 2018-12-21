@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Date</th>
+      <th>Bookings</th>
       <th>Status</th>
     </tr>
   </thead>
@@ -18,8 +19,8 @@
 
   <tbody>
     <% @days.each do |day| %>
-      <tr>
 
+      <tr>
         <% full_day = day.name.strftime("%a %b %-d '%y")   %>
 
         <% if day.open_close.name == "Open" %>
@@ -28,6 +29,19 @@
           <td><%= full_day %></td>
           
         <% end %>
+
+
+
+    <% if day.reservations.where('member_id = ?',current_member.id).count > 0 %>
+      <td><i class="glyphicon glyphicon-check "></i></td>     
+    <% else %>
+      <% if day.open_close.name == "Open" %>
+        <td><i class="glyphicon glyphicon-unchecked "></i></td> 
+      <% else %>
+        <td></td>    
+      <% end %>
+    <% end %>
+
 
 
 

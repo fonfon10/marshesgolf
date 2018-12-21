@@ -95,7 +95,6 @@
                     <% end %>
                       
                     <% if @reservations[i+1].activity.name != 'Open' or reservation.timeslot.start.hour <= 11  %>                      
-                      <i>  |  </i>   
                       <%= link_to 'Practice', book_practice_reservation_path(reservation),class: "btn btn-warning" %>
                     <% end %>
                   </td>
