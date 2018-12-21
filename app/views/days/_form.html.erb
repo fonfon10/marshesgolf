@@ -12,9 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.date_select :name, id: :day_name %>
+<%= @day.name.strftime("%A/%d-%^b-%y") %>  </div>
+
+
+  <div class="field">
+    <%= form.label :open_close %>
+    <%= form.select(:open_close_id, @open_closes)%>
+    
   </div>
+
 
   <div class="actions">
     <%= form.submit %>

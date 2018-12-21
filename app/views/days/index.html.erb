@@ -5,11 +5,14 @@
 <table class="table-striped"  >
   <thead>
     <tr>
-      <th>Day</th>
       <th>Date</th>
       <th>Status</th>
     </tr>
   </thead>
+
+
+
+
 
 <% firstday = Date.new(2018,12,28) %>
 
@@ -17,32 +20,26 @@
     <% @days.each do |day| %>
       <tr>
 
+        <% full_day = day.name.strftime("%a %b %-d '%y")   %>
 
-
-        <% if day.name < firstday %>
-          <td><%= day.name.strftime("%A") %></td>
-          <td><%= day.name %></td>
-            <td> Closed </td>
-          
+        <% if day.open_close.name == "Open" %>
+          <td><%= link_to full_day, day %></td>
         <% else %>
-          <td><%= link_to day.name.strftime("%A"), day %></td>
-          <td><%= link_to day.name, day %></td>
-          <td><%= link_to "Open", day %></td>
-        <% end %>
-
-
-        <% if day.name.sunday? %>
-          <tr>
-            <td> Monday </td>
-            <td>------</td>
-            <td> Closed </td>
-          </tr>
+          <td><%= full_day %></td>
           
-
-
-
         <% end %>
 
+
+
+        <% if current_member.membership.name == "Admin" or current_member.membership.name == "Operator"  %>
+          <td><%= link_to day.open_close.name, edit_day_path(day) %></td>
+        <% else %>
+          <% if day.open_close.name == "Open" %>
+            <td><span class="greendot"></span></td>
+          <% else %>                  
+            <td><span class="reddot"></span></td>                      
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

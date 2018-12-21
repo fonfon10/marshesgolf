@@ -45,6 +45,13 @@ age_group_types.each do |a|
 end
 
 
+#open_close
+open_close_types = ['Open', 'Closed']
+open_close_types.each do |o|
+	OpenClose.create!(name: o)
+end
+
+
 #activities
 activity_types = ['Open','Practice', 'Lesson', 'Closed']
 activity_types.each do |a|
@@ -52,15 +59,20 @@ activity_types.each do |a|
 end
 
 
+
+open_close_type_open = OpenClose.first
+open_close_type_closed = OpenClose.last
+
+
 #day
 day = Date.new(2018,12,20)
 lastday = Date.new(2019,03,31)
 
 while day <= lastday do
-	Day.create!(name: day)
+	Day.create!(name: day, open_close: open_close_type_open)
 	day += 1
 	if day.monday? 
-		day += 1
+	Day.create!(name: day, open_close: open_close_type_closed)
 	end
 end
 
@@ -76,7 +88,6 @@ age_group_type_junior = AgeGroup.last
 
 activity_type_open = Activity.first
 activity_type_closed = Activity.last
-
 
 
 #Member.create!(email: 'slafontaine10@gmail.com', password: 'numb10', password_confirmation: 'numb10', membership: membership_type_Admin, age_group: age_group_type_adult)

@@ -12,8 +12,13 @@ else
 	number_of_days = 6	
 end
 
+if current_member.membership.name != "Admin"
+	@days = Day.where('name >= ?', Date.today).first(number_of_days)
+else
+	@days = Day.all
+end
 
-@days = Day.where('name >= ?', Date.today).first(number_of_days)
+
 #@days = Day.where('name >= ?', Date.today).first(7)
 		
 end
@@ -37,10 +42,20 @@ def show
 end
 
 
+
+
+def edit
+  @day = Day.find(params[:id])
+  @open_closes = OpenClose.order('name ASC').map { |i| [i.name, i.id]}
+end
+
+
+
+
   private
 
     def day_params
-      params.require(:day).permit(:name)
+      params.require(:day).permit(:name, :open_close_id)
     end
 end
 

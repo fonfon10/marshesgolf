@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
 
+  resources :open_closes
   resources :days 
 
   resources :reservations do
