@@ -7,12 +7,12 @@ def index
 #	@days = Day.first(7)
 
 if Time.now.hour > 12 #for heroku timezone
-	number_of_days = 7
+	number_of_days = 8	
 else
-	number_of_days = 6	
+	number_of_days = 7	
 end
 
-if current_member.membership.name != "Admin"
+if current_member.membership.name != "Admin" and current_member.membership.name != "Operator"
 	@days = Day.where('name >= ?', Date.today).first(number_of_days)
 else
 	@days = Day.all

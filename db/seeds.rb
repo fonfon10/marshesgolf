@@ -71,8 +71,10 @@ lastday = Date.new(2019,03,31)
 while day <= lastday do
 	Day.create!(name: day, open_close: open_close_type_open)
 	day += 1
+
 	if day.monday? 
-	Day.create!(name: day, open_close: open_close_type_closed)
+		Day.create!(name: day, open_close: open_close_type_closed)
+		day += 1
 	end
 end
 

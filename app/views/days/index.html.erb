@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Days</h1>
+<h1>Schedule</h1>
 
 <table class="table-striped"  >
   <thead>
@@ -16,32 +16,40 @@
 
 
 <% firstday = Date.new(2018,12,28) %>
+<% today = Date.today  %>
 
   <tbody>
     <% @days.each do |day| %>
 
-      <tr>
-        <% full_day = day.name.strftime("%a %b %-d '%y")   %>
-
-        <% if day.open_close.name == "Open" %>
-          <td><%= link_to full_day, day %></td>
-        <% else %>
-          <td><%= full_day %></td>
-          
-        <% end %>
-
-
-
-    <% if day.reservations.where('member_id = ?',current_member.id).count > 0 %>
-      <td><i class="glyphicon glyphicon-check "></i></td>     
+    <% if day.name < today %>
+      <tr style="color:red; text-decoration: line-through;">
     <% else %>
-      <% if day.open_close.name == "Open" %>
-        <td><i class="glyphicon glyphicon-unchecked "></i></td> 
-      <% else %>
-        <td></td>    
-      <% end %>
+      <tr>
+
     <% end %>
 
+        <td><%= day.name.strftime("%a %b %-d '%y")   %> </td>
+        
+  
+
+
+    <% if day.open_close.name == "Open" %>
+      <% if day.reservations.where('member_id = ?',current_member.id).count > 0 %>
+        <td> <%= link_to day  do %> 
+           <i class="glyphicon glyphicon-check "></i>   
+           <% end %> 
+        </td>
+      <% else %>
+        <td> <%= link_to day  do %> 
+           <i class="glyphicon glyphicon-unchecked "></i>   
+           <% end %> 
+        </td>
+      <% end %>
+
+    <% else %>
+      <td></td>
+      
+    <% end %>
 
 
 
