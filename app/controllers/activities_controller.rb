@@ -1,4 +1,6 @@
 class ActivitiesController < InheritedResources::Base
+before_action :authenticate_member!
+
 
   private
 

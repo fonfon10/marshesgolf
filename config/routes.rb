@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
 
+  resources :dashboard
   resources :open_closes
   resources :days do
     member do 
@@ -26,7 +27,17 @@ Rails.application.routes.draw do
 
   resources :activities
   resources :timeslots
-  resources :memberships
+  resources :memberships do
+      member do
+        get 'membership_to_operator'
+        get 'membership_to_coaching'
+        get 'membership_to_practice'
+        get 'membership_to_admin'
+      end
+    end
+
+
+
   resources :age_groups
   #resources :members
   devise_for :members

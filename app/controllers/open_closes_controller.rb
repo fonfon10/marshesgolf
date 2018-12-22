@@ -1,4 +1,5 @@
 class OpenClosesController < InheritedResources::Base
+before_action :authenticate_member!
 
   private
 

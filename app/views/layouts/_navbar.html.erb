@@ -41,6 +41,31 @@
 
 
 
+        <% if current_member.membership.name == 'Admin' or current_member.membership.name == 'Operator' %>
+          
+       <!-- Dashboard for ADMIN/OPERTOR -->   
+          <li>
+            <%= link_to dashboard_index_path do %>
+                <i class="glyphicon glyphicon-plus "></i>Dashboard
+            <% end %>
+          </li>          
+
+        <% end %>  
+
+       <!-- Dashboard for COACHING-->   
+        <% if current_member.membership.name == 'Coaching' %>
+          <li>
+            <%= link_to dashboard_path(current_member) do %>
+                <i class="glyphicon glyphicon-plus "></i>Dashboard
+            <% end %>
+          </li>          
+
+
+        <% end %>
+
+
+
+
           <li>
           <% if current_member.membership.name == 'Admin' %>
             <%= link_to edit_member_registration_path(current_member) do %>
@@ -52,6 +77,7 @@
               <i class="glyphicon glyphicon-calendar "></i>Calendar
           <% end %>
           </li>
+
 
           <li>
           <%= link_to destroy_member_session_path, method: :delete do %>
@@ -81,6 +107,20 @@
     </div>
 
   </div>
+
+<% serge = Member.find_by firstname: "Serge" %>
+
+<% if current_member == serge %>
+  
+  <div>
+      <%= link_to 'Operator', membership_to_operator_membership_path(current_member),class: "btn btn-warning"%>
+      <%= link_to 'Coaching', membership_to_coaching_membership_path(current_member),class: "btn btn-warning"%>
+      <%= link_to 'Practice', membership_to_practice_membership_path(current_member),class: "btn btn-warning"%>
+      <%= link_to 'Admin', membership_to_admin_membership_path(current_member),class: "btn btn-warning"%>
+  </div>
+
+<% end %>
+
 
 </nav>
 
