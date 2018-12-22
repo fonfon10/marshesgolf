@@ -15,7 +15,7 @@ end
 if current_member.membership.name != "Admin" and current_member.membership.name != "Operator"
 	@days = Day.where('name >= ?', Date.today).first(number_of_days)
 else
-	@days = Day.all
+	@days = Day.all.order(id: :asc)
 end
 
 
