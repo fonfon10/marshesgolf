@@ -129,7 +129,17 @@
             
 
           <% if reservation.activity.name != 'Open'  %>
-            <td style = "border-right: 5px solid "><%= reservation.activity.name %></td>
+              <% if reservation.activity.name == "Lesson" and current_member.membership.name == "Operator"%>
+
+                <td style = "border-right: 5px solid " bgcolor="yellow"> 
+              <% else %>
+                <td style = "border-right: 5px solid ">
+
+              <% end %>
+
+
+              <%= reservation.activity.name %></td>
+
           <% else %>
             <td style = "border-right: 5px solid "></td>
           <% end %>

@@ -1,5 +1,101 @@
 <p id="notice"><%= notice %></p>
 
+<% firstday = Date.new(2018,12,28) %>
+<% today = Date.today  %>
+
+<% if  current_member.membership.name != "Operator"%>
+  
+
+  <h1>Reservations</h1>
+
+  <table class="table-striped" >
+    <thead>
+      <tr>
+        <th></th>
+        <th>Day</th>
+        <th>Time</th>
+        <th>Lesson/Practice</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+
+        <% if reservation.day.name >= today  %>
+            
+
+         <td> <%= link_to cancel_reservation_path(reservation)  do %> 
+              <i class="glyphicon glyphicon-trash "></i>   
+              <% end %> 
+         </td>
+
+          <td><%= reservation.day.name.strftime("%a %b %-d '%y") %></td>        
+          <td><%= reservation.timeslot.start.strftime("%H:%M") %></td>        
+          <td><%= reservation.activity.name %></td>        
+        </tr>
+
+
+       <% end %>
+
+
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>
+
+
+<% if  current_member.membership.name == "Operator"%>
+  
+
+  <h1>Lessons</h1>
+
+  <table class="table-striped" >
+    <thead>
+      <tr>
+        <th></th>
+        <th>Day</th>
+        <th>Time</th>
+        <th>Member</th>
+        <th>Lesson/Practice</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+
+        <% if reservation.day.name >= today  %>
+            
+
+         <td> <%= link_to cancel_reservation_path(reservation)  do %> 
+              <i class="glyphicon glyphicon-trash "></i>   
+              <% end %> 
+         </td>
+
+          <td><%= reservation.day.name.strftime("%a %b %-d '%y") %></td>        
+          <td><%= reservation.timeslot.start.strftime("%H:%M") %></td>        
+          <td><%= reservation.member.lastname %>, <%= reservation.member.firstname %></td>        
+          <td><%= reservation.activity.name %></td>        
+        </tr>
+
+
+       <% end %>
+
+
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>
+
+
+
+
+
+
+
 <h1>Schedule</h1>
 
 <table class="table-striped"  >
@@ -15,8 +111,6 @@
 
 
 
-<% firstday = Date.new(2018,12,28) %>
-<% today = Date.today  %>
 
   <tbody>
     <% @days.each do |day| %>
@@ -81,5 +175,15 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
+
+
+
+
+
+
+
+
+
+
+

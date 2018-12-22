@@ -18,15 +18,21 @@ else
 	@days = Day.all.order(id: :asc)
 end
 
+activity_lesson = Activity.find_by name: "Lesson"
 
-#@days = Day.where('name >= ?', Date.today).first(7)
+if current_member.membership.name != "Operator"
+	@reservations = Reservation.where('member_id = ?', current_member.id).order(id: :asc)
+else
+	@reservations = Reservation.where('activity_id = ?', activity_lesson.id).order(id: :asc)
+
+end
+
 		
 end
 
 
 def show
 	nextDay = params[:id].to_i+1
-
   @nextDay = Day.find(nextDay)
 
 
