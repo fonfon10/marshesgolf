@@ -4,7 +4,7 @@
 
 
 
-<h1>Reservations <%= thisday.strftime("%A/%d-%^b-%y") %>   </h1>
+<h1> <%= thisday.strftime("%a %b %-d '%y")  %>   </h1>
 
 <% if current_member.membership.name == "Admin" %>
    <td> <%= link_to '>>>', @nextDay %> </td>
@@ -17,13 +17,13 @@
 
   <thead>
     <tr> 
-      <td colspan="4"> BAY #1</td>
+      <td colspan="4" style = "border-right: 1px solid "> BAY #1</td>
       <td ></td>
       <td colspan="4"> BAY #2</td>
     </tr>
     <tr>
       <% if member_signed_in? %>
-        <th>Cancel</th>
+        <th>  </th>
       <% else %>
         <th></th>
       <% end %>
@@ -37,9 +37,9 @@
       <% end %>
 
       <th>Activity</th>
-      <th></th>
+
       <% if member_signed_in? %>
-        <th>Cancel</th>
+        <th></th>
       <% else %>
         <th></th>
       <% end %>
@@ -50,7 +50,7 @@
       <% else %>
         <th></th>
       <% end %>
-      <th>Activity</th>
+      <th style = "border-right: 1px solid ">Activity</th>
     </tr>
   </thead>
   
@@ -79,8 +79,13 @@
           <% if member_signed_in? %>        
 
             <% if reservation.activity.name != 'Open'  %>
+              <% if reservation.member == current_member %>
+                <td bgcolor="yellow"> 
+              <% else %>
+                <td> 
+              <% end %>
                   
-              <td><%= reservation.member.firstname[0] %><%= reservation.member.lastname %></td>
+              <%= reservation.member.firstname[0] %><%= reservation.member.lastname %></td>
 
 <!--              <td><%= @reservations[i].member == current_member %></td>
 -->
@@ -88,7 +93,7 @@
             <% else %>
 
               <% if i.even? %>
-                <% if ((@reservations[i+1].member != current_member) and (@count_reservations.to_i < 2))  and current_member.membership.name != 'Operator'%>
+                <% if ((@reservations[i+1].member != current_member) and (@count_reservations.to_i < 2))  and (current_member.membership.name != 'Operator' )%>
                   <td>
                     <% if reservation.timeslot.start.hour > 11 or (reservation.day.name.sunday? and reservation.timeslot.start.hour >10)  %>             
                       <%= link_to 'Lesson', book_lesson_reservation_path(reservation),class: "btn btn-danger"%>
@@ -124,12 +129,11 @@
             
 
           <% if reservation.activity.name != 'Open'  %>
-            <td ><%= reservation.activity.name %></td>
+            <td style = "border-right: 5px solid "><%= reservation.activity.name %></td>
           <% else %>
-            <td ></td>
+            <td style = "border-right: 5px solid "></td>
           <% end %>
 
-          <td></td>
 
 
       <% if reservation.bay == 2 %>
