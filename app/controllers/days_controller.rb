@@ -42,6 +42,22 @@ def show
 end
 
 
+def toggle_open_close_status
+	@day = Day.find(params[:id])
+	open_close_type_open = OpenClose.first
+	open_close_type_closed = OpenClose.last
+
+	if @day.open_close.name == "Open"
+		@day.update(open_close: open_close_type_closed)
+	else
+		@day.update(open_close: open_close_type_open)
+	end
+
+    @day.save
+    redirect_to days_path
+
+end
+
 
 
 def edit

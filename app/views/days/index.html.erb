@@ -28,7 +28,13 @@
 
     <% end %>
 
-        <td><%= day.name.strftime("%a %b %-d '%y")   %> </td>
+
+    <% if day.open_close.name == "Closed" %>
+      <td style="color:red;">
+    <% else %>
+      <td>      
+    <% end %>
+        <%= day.name.strftime("%a %b %-d '%y")   %> </td>
         
   
 
@@ -54,9 +60,18 @@
 
 
         <% if current_member.membership.name == "Admin" or current_member.membership.name == "Operator"  %>
-          <td><%= link_to day.open_close.name, edit_day_path(day) %></td>
+
+          <td> <%= link_to toggle_open_close_status_day_path(day)  do %> 
+            <% if day.open_close.name == "Open"  %>
+              <span class="greendot"></span></td>
+            <% else %>                  
+              <span class="reddot"></span></td>                                    
+            <% end %>
+          <% end %>   
+          
         <% else %>
           <% if day.open_close.name == "Open" %>
+
             <td><span class="greendot"></span></td>
           <% else %>                  
             <td><span class="reddot"></span></td>                      

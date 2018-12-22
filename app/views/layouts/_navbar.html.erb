@@ -31,7 +31,7 @@
         <% end %>  
 
 
-        <% if current_member.membership.name == 'Admin' or current_member.membership.name == 'Operator' %>
+        <% if current_member.membership.name == 'Admin' %>
         <li>
           <%= link_to reservations_path do %>
               <i class="glyphicon glyphicon-plus "></i>Reservations

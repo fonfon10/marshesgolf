@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
 
   resources :open_closes
-  resources :days 
+  resources :days do
+    member do 
+      get 'toggle_open_close_status'
+    end
+  end
 
   resources :reservations do
       member do

@@ -88,6 +88,10 @@ def cancel
 end
 
 
+def update
+  redirect_to root_path
+end
+
 
 def edit
   @reservation = Reservation.find(params[:id])
