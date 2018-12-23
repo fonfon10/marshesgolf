@@ -2,6 +2,14 @@
   <div class="container">
     <div class="navbar-header">
       <%= link_to "Marshes Winter Academy", root_path, class:"navbar-brand" %>
+      <br>
+
+      <% if member_signed_in?  %>
+        <p><%= current_member.firstname %> <%= current_member.lastname %></p>
+        <p><%= current_member.membership.name %></p>
+      <% end %>
+    </div>
+
 
     </div>  
 
@@ -67,11 +75,9 @@
 
 
           <li>
-          <% if current_member.membership.name == 'Admin' %>
             <%= link_to edit_member_registration_path(current_member) do %>
                 <i class="glyphicon glyphicon-cog "></i>Profile
             <% end %>
-          <% end %>
 
           <%= link_to days_path do %>
               <i class="glyphicon glyphicon-calendar "></i>Calendar
@@ -98,13 +104,6 @@
       </ul>
     </div>
 
-    <div>
-
-      <% if member_signed_in?  %>
-        <p><%= current_member.firstname %> <%= current_member.lastname %></p>
-        <p><%= current_member.membership.name %></p>
-      <% end %>
-    </div>
 
   </div>
 
