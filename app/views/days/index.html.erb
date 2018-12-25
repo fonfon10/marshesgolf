@@ -26,7 +26,7 @@
             
 
          <td> <%= link_to cancel_reservation_path(reservation)  do %> 
-              <i class="glyphicon glyphicon-trash "></i>   
+              <i class="fa fa-trash "></i>   
               <% end %> 
          </td>
 
@@ -70,7 +70,7 @@
             
 
          <td> <%= link_to cancel_reservation_path(reservation)  do %> 
-              <i class="glyphicon glyphicon-trash "></i>   
+              <i class="fa fa-trash "></i>   
               <% end %> 
          </td>
 
@@ -136,13 +136,17 @@
     <% if day.open_close.name == "Open" %>
       <% if day.reservations.where('member_id = ?',current_member.id).count > 0 %>
         <td> <%= link_to day  do %> 
-           <i class="glyphicon glyphicon-check "></i>   
-           <% end %> 
+          <span style="font-size: 2em; color: black;">
+            <i class="fas fa-check-square"></i>
+          </span>           
+        <% end %> 
         </td>
       <% else %>
         <td> <%= link_to day  do %> 
-           <i class="glyphicon glyphicon-unchecked "></i>   
-           <% end %> 
+          <span style="font-size: 2em; color: grey;">
+            <i class="fas fa-square"></i>
+          </span>           
+        <% end %> 
         </td>
       <% end %>
 
@@ -157,18 +161,28 @@
 
           <td> <%= link_to toggle_open_close_status_day_path(day)  do %> 
             <% if day.open_close.name == "Open"  %>
-              <span class="greendot"></span></td>
+              <span style="font-size: 1em; color: green;">
+                <i class="fas fa-door-open"></i></td>
+              </span>
             <% else %>                  
-              <span class="reddot"></span></td>                                    
+              <span style="font-size: 1em; color: red;">
+                <i class="fas fa-door-closed"></i></td>                                    
+              </span>
             <% end %>
           <% end %>   
           
         <% else %>
           <% if day.open_close.name == "Open" %>
 
-            <td><span class="greendot"></span></td>
+            <td><span style="font-size: 1em; color: green;">
+                <i class="fas fa-door-open"></i>
+                </span>
+            </td>
           <% else %>                  
-            <td><span class="reddot"></span></td>                      
+            <td><span style="font-size: 1em; color: red;">
+                <i class="fas fa-door-closed"></i>                                    
+              </span>
+            </td>                      
           <% end %>
         <% end %>
       </tr>

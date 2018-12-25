@@ -1,9 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+
 <% thisday = @reservations[0].day.name %>
-
-
-
 <h1> <%= thisday.strftime("%a %b %-d '%y")  %>   </h1>
 
 <% if current_member.membership.name == "Admin" %>
@@ -11,104 +9,104 @@
 <% end %>
 
 
-<div style="float: left">
+<!-- <div style="float: left"> -->
 
-<table class="table-striped">
+  <table class="table-striped">
 
-  <thead>
-    <tr> 
-      <td colspan="4" style = "border-right: 1px solid "> BAY #1</td>
-      <td ></td>
-      <td colspan="4"> BAY #2</td>
-    </tr>
-    <tr>
-      <% if member_signed_in? %>
-        <th>  </th>
-      <% else %>
-        <th></th>
-      <% end %>
+    <thead>
+      <tr> 
+        <td colspan="4" style = "border-right: 1px solid "> BAY #1</td>
+        <td ></td>
+        <td colspan="4"> BAY #2</td>
+      </tr>
 
-      <th>Time</th>
+      <tr>
+        <% if member_signed_in? %>
+          <th>  </th>
+        <% else %>
+          <th></th>
+        <% end %>
 
-      <% if member_signed_in? %>
-        <th>Member</th>
-      <% else %>
-        <th></th>
-      <% end %>
+        <th>Time</th>
 
-      <th>Activity</th>
+        <% if member_signed_in? %>
+          <th>Mem</th>
+        <% else %>
+          <th></th>
+        <% end %>
 
-      <% if member_signed_in? %>
-        <th></th>
-      <% else %>
-        <th></th>
-      <% end %>
-      
-      <th>Time</th>
-      <% if member_signed_in? %>
-        <th>Member</th>
-      <% else %>
-        <th></th>
-      <% end %>
-      <th style = "border-right: 1px solid ">Activity</th>
-    </tr>
-  </thead>
-  
-  <tbody>
-        <tr>
+        <th>Act</th>
+
+        <% if member_signed_in? %>
+          <th></th>
+        <% else %>
+          <th></th>
+        <% end %>
+        
+        <th>Time</th>
+        <% if member_signed_in? %>
+          <th>Mem</th>
+        <% else %>
+          <th></th>
+        <% end %>
+        <th style = "border-right: 1px solid ">Act</th>
+      </tr>
+    </thead>
+    
+
+    <tbody>
+      <tr>
+
+        <!-- Add TRASH can to allow deletion is current user or operator -->
         <% @reservations.each_with_index do |reservation, i| %>
-        	<% if reservation.member == current_member or (current_member.membership.name == 'Operator' and reservation.activity.name != 'Open')%>
+          <% if reservation.member == current_member or (current_member.membership.name == 'Operator' and reservation.activity.name != 'Open')%>
 
             <td> <%= link_to cancel_reservation_path(reservation)  do %> 
-                 <i class="glyphicon glyphicon-trash "></i>   
+                  <i class="fas fa-trash"></i>   
                  <% end %> 
             </td>
 
-  	      <% else %>
-  	      	<td></td>
-  	      <% end %>
+    	    <% else %>
+    	      <td></td>
+          <% end %>
 
+
+          <!-- Display timeslot, allow editing if Admin or Operator -->
           <% if current_member.membership.name == "Admin" or current_member.membership.name == "Operator" %>
-            <td> <%= link_to reservation.timeslot.start.strftime("%H:%M"), edit_reservation_path(reservation) %> </td>
-            
+            <td> <%= link_to reservation.timeslot.start.strftime("%H:%M"), edit_reservation_path(reservation) %>
+            </td>
+              
           <% else %>
             <td><%= reservation.timeslot.start.strftime("%H:%M") %></td>
           <% end %>
 
 
           <% if member_signed_in? %>        
-
             <% if reservation.activity.name != 'Open'  %>
               <% if reservation.member == current_member %>
                 <td bgcolor="yellow"> 
               <% else %>
                 <td> 
               <% end %>
-                  
-              <%= reservation.member.firstname[0] %><%= reservation.member.lastname %></td>
-
-<!--              <td><%= @reservations[i].member == current_member %></td>
--->
+                    
+                <%= reservation.member.firstname[0] %><%= reservation.member.lastname[0] %></td>
 
             <% else %>
-
               <% if i.even? %>
                 <% if ((@reservations[i+1].member != current_member) and (@count_reservations.to_i < 2))  and (current_member.membership.name != 'Operator' )%>
                   <td>
                     <% if reservation.timeslot.start.hour > 11 or (reservation.day.name.sunday? and reservation.timeslot.start.hour >10)  %>             
                       <%= link_to 'Lesson', book_lesson_reservation_path(reservation),class: "btn btn-danger"%>
                     <% end %>
-                      
+                          
                     <% if @reservations[i+1].activity.name != 'Open' or reservation.timeslot.start.hour <= 11  %>                      
-                      <%= link_to 'Practice', book_practice_reservation_path(reservation),class: "btn btn-warning" %>
+                          <%= link_to 'Practice', book_practice_reservation_path(reservation),class: "btn btn-warning" %>
                     <% end %>
                   </td>
                 <% else %>
                   <td></td>
                 <% end %>
               <% end %>
-
-
 
               <% if i.odd? %>
                 <% if ((@reservations[i-1].member != current_member) and (@count_reservations.to_i < 2) and current_member.membership.name != 'Operator') %>
@@ -120,41 +118,30 @@
                 <% end %>
               <% end %>
 
-            <% end %>
+            <% end %>   <!-- Reservation != 'Open'-->
+          <% end %>    <!-- member_signed_in -->
+              
 
-
-
-
-          <% end %>    
-            
-
+          <!-- Highlight Lessons to Operator View -->
           <% if reservation.activity.name != 'Open'  %>
-              <% if reservation.activity.name == "Lesson" and current_member.membership.name == "Operator"%>
-
-                <td style = "border-right: 5px solid " bgcolor="yellow"> 
-              <% else %>
-                <td style = "border-right: 5px solid ">
-
-              <% end %>
-
-
-              <%= reservation.activity.name %></td>
-
+            <% if reservation.activity.name == "Lesson" and current_member.membership.name == "Operator"%>
+              <td style = "border-right: 5px solid " bgcolor="yellow"> 
+            <% else %>
+              <td style = "border-right: 5px solid ">
+            <% end %>
+                <%= reservation.activity.name %></td>
           <% else %>
-            <td style = "border-right: 5px solid "></td>
+              <td style = "border-right: 5px solid "></td>
           <% end %>
 
+          <% if reservation.bay == 2 %>
+      </tr>
+          <% end %>
 
+      <% end %>   <!-- Reservation_each_with_index -->
+    </tbody>
+  </table>
+<!-- </div> -->
 
-      <% if reservation.bay == 2 %>
-
-        </tr>
-      <% end %>
-
-    <% end %>
-  </tbody>
-</table>
-</div>
-
-
+<br>
 
