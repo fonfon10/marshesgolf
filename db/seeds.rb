@@ -174,4 +174,4 @@ end
 end	
 
 
-AdminUser.create!(email: 'slafontaine10@gmail.com', password: 'numb10', password_confirmation: 'numb10')
+AdminUser.create!(email: 'slafontaineadmin@gmail.com', password: 'numb10', password_confirmation: 'numb10')

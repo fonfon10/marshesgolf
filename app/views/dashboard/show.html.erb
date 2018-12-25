@@ -1,5 +1,6 @@
 
-  
+  <% today = Date.today %>
+  <% timenow = Time.now.getlocal('-05:00') %>
 
   <h1>Summary</h1>
   <h2><%= @member.lastname %>, <%= @member.firstname %></h2>
@@ -11,6 +12,7 @@
         <% if current_member.membership.name == "Admin" or current_member.membership.name == "Operator" %>
           <th>Cancel</th>
         <% end %>
+        <th></th>
         <th>Date</th>
         <th>Time</th>
         <th>Activity</th>
@@ -22,11 +24,15 @@
         <tr>
         <% if current_member.membership.name == "Admin" or current_member.membership.name == "Operator" %>
           <td> <%= link_to cancel_reservation_path(reservation)  do %> 
-               <i class="glyphicon glyphicon-trash "></i>   
+               <i class="fas fa-trash "></i>   
           <% end %> 
           </td>
         <% end %>
-
+          <% if reservation.day.name >= today %>
+              <td><i class="fas fa-fast-forward "></i> </td>
+            <% else %>
+              <td></td>
+            <% end %>  
           <td><%= reservation.day.name.strftime("%a %b %-d '%y") %></td>  
           <td><%= reservation.timeslot.start.strftime("%H:%M") %></td>  
           <td><%= reservation.activity.name %></td>  
@@ -36,4 +42,7 @@
       <% end %>
     </tbody>
   </table>
+
+    <p><i>Future sessions <i class="fa fa-fast-forward "></i></i></p>
+
 
