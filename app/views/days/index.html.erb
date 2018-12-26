@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<% firstday = Date.new(2018,12,28) %>
+<% firstday = Date.new(2018,12,31) %>
 <% today = Date.today  %>
 
 <% if  current_member.membership.name != "Operator"%>
@@ -131,78 +131,74 @@
   <tbody>
     <% @days.each do |day| %>
 
-    <% if day.name < today %>
-      <tr style="color:red; text-decoration: line-through;">
-    <% else %>
-      <tr>
-
-    <% end %>
-
-
-    <% if day.open_close.name == "Closed" %>
-      <td style="color:red;">
-    <% else %>
-      <td>      
-    <% end %>
-        <%= day.name.strftime("%a %b %-d '%y")   %> </td>
-        
-  
-
-
-    <% if day.open_close.name == "Open" %>
-      <% if day.reservations.where('member_id = ?',current_member.id).count > 0 %>
-        <td> <%= link_to day  do %> 
-          <span style="font-size: 2em; color: black;">
-            <i class="fas fa-check-square"></i>
-          </span>           
-        <% end %> 
-        </td>
+    <% if  day.name >= firstday %>
+      
+      <% if day.name < today %>
+        <tr style="color:red; text-decoration: line-through;">
       <% else %>
-        <td> <%= link_to day  do %> 
-          <span style="font-size: 2em; color: grey;">
-            <i class="fas fa-square"></i>
-          </span>           
-        <% end %> 
-        </td>
+        <tr>
       <% end %>
 
-    <% else %>
-      <td></td>
-      
-    <% end %>
+      <% if day.open_close.name == "Closed" %>
+        <td style="color:red;">
+      <% else %>
+        <td>      
+      <% end %>
 
 
-
-        <% if current_member.membership.name == "Admin" or current_member.membership.name == "Operator"  %>
-
-          <td> <%= link_to toggle_open_close_status_day_path(day)  do %> 
-            <% if day.open_close.name == "Open"  %>
-              <span style="font-size: 1em; color: green;">
-                <i class="fas fa-door-open"></i></td>
-              </span>
-            <% else %>                  
-              <span style="font-size: 1em; color: red;">
-                <i class="fas fa-door-closed"></i></td>                                    
-              </span>
-            <% end %>
-          <% end %>   
-          
+      <%= day.name.strftime("%a %b %-d '%y")   %> </td>
+        
+      <% if day.open_close.name == "Open" %>
+        <% if day.reservations.where('member_id = ?',current_member.id).count > 0 %>
+          <td> <%= link_to day  do %> 
+            <span style="font-size: 2em; color: black;">
+              <i class="fas fa-check-square"></i>
+            </span>           
+            <% end %> 
+          </td>
         <% else %>
-          <% if day.open_close.name == "Open" %>
-
-            <td><span style="font-size: 1em; color: green;">
-                <i class="fas fa-door-open"></i>
-                </span>
-            </td>
-          <% else %>                  
-            <td><span style="font-size: 1em; color: red;">
-                <i class="fas fa-door-closed"></i>                                    
-              </span>
-            </td>                      
-          <% end %>
+          <td> <%= link_to day  do %> 
+            <span style="font-size: 2em; color: grey;">
+              <i class="fas fa-square"></i>
+            </span>           
+            <% end %> 
+          </td>
         <% end %>
-      </tr>
+  
+      <% else %>
+        <td></td>
+      <% end %>
+
+      <% if current_member.membership.name == "Admin" or current_member.membership.name == "Operator"  %>
+
+        <td> <%= link_to toggle_open_close_status_day_path(day)  do %> 
+          <% if day.open_close.name == "Open"  %>
+            <span style="font-size: 1em; color: green;">
+              <i class="fas fa-door-open"></i></td>
+            </span>
+          <% else %>                  
+            <span style="font-size: 1em; color: red;">
+              <i class="fas fa-door-closed"></i></td>  
+            </span>
+          <% end %>
+        <% end %>   
+          
+      <% else %>
+        <% if day.open_close.name == "Open" %>
+          <td><span style="font-size: 1em; color: green;">
+              <i class="fas fa-door-open"></i>
+              </span>
+          </td>
+        <% else %>                  
+          <td><span style="font-size: 1em; color: red;">
+                <i class="fas fa-door-closed"></i>                                    
+               </span>
+          </td>                      
+        <% end %>
+      <% end %>
+    </tr>
     <% end %>
+  <% end %>  <!-- temporary start -->
   </tbody>
 </table>
 

@@ -65,7 +65,7 @@ open_close_type_closed = OpenClose.last
 
 
 #day
-day = Date.new(2018,12,26)
+day = Date.new(2018,12,25)
 lastday = Date.new(2019,03,31)
 
 while day <= lastday do
