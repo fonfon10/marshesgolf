@@ -3,38 +3,41 @@
 
 <% thisday = @reservations[0].day.name %>
 <h3><b><u> <%= thisday.strftime("%a %b %-d '%y")  %>  </u></b></h3>
-<p><i>To book a Practice or Lesson, clink on the desired time/activity.  Note that Bay #1 always favors Lessons and will only open a Practice option when Bay#2 is booked first<p>
-<P>You can't book more than two timeslots per day.  If you need more time, please contact Derek directly</P>
-<p> To delete a reservation, click on <i class="fa fa-trash "></i> beside the desired cancellation date/timeslot</i></p>
+<p><i>To book a Practice or Lesson, clink on the desired time/activity.  Note that Bay #1 always favors Lessons and will only open a Practice option when Bay#2 is booked first</i><p>
+<P><i>You can't book more than two timeslots per day.  If you need more time, please contact Derek directly</i></P>
+<p><i>To delete a reservation, click on <span><i class="fa fa-trash "></i></span>
+beside the desired cancellation date/timeslot</i></p>
 
-
-<!-- <div style="float: left"> -->
 
   <table class="table-striped">
 
     <thead>
       <tr> 
-        <td colspan="4" style = "border-right: 1px solid "> <h2>BAY #1</h2></td>
-        <td ></td>
-        <td colspan="4"><h2>BAY #2</h2></td>
+
+        <td colspan="4" style = "border-right: 1px solid;"> <span><i style = "font-size: 3em;" class="fas fa-dice-one "></i></span></td>
+        <td></td>
+        <td colspan="4"><i style = "font-size: 3em;" class="fas fa-dice-two"></i></td>
       </tr>
 
       <tr>
+
         <% if member_signed_in? %>
-          <th>  </th>
+        <th>  </th>
+
+
         <% else %>
           <th></th>
         <% end %>
 
-        <th>Time</th>
+        <th><i class="fas fa-clock"></i></th>
 
         <% if member_signed_in? %>
-          <th>Mem</th>
+          <th><i class="fas fa-user"></i></th>
         <% else %>
           <th></th>
         <% end %>
 
-        <th>Act</th>
+        <th><i class="fas fa-golf-ball "></i></th>
 
         <% if member_signed_in? %>
           <th></th>
@@ -42,19 +45,24 @@
           <th></th>
         <% end %>
         
-        <th>Time</th>
+        <th><i class="fas fa-clock"></i></th>
         <% if member_signed_in? %>
-          <th>Mem</th>
+          <th><i class="fas fa-user"></i></th>
         <% else %>
           <th></th>
         <% end %>
-        <th style = "border-right: 1px solid ">Act</th>
+        <th style = "border-right: 1px solid "><i class="fas fa-golf-ball "></i></th>
       </tr>
+
+
     </thead>
     
 
+
+
     <tbody>
       <tr>
+
 
         <!-- Add TRASH can to allow deletion is current user or operator -->
         <% @reservations.each_with_index do |reservation, i| %>
@@ -68,6 +76,7 @@
     	    <% else %>
     	      <td></td>
           <% end %>
+
 
 
           <!-- Display timeslot, allow editing if Admin or Operator -->
@@ -99,12 +108,12 @@
                 <% if ((@reservations[i+1].member != current_member) and (@count_reservations.to_i < 2))  and (current_member.membership.name != 'Operator' )%>
                   <td>
                     <% if reservation.timeslot.start.hour > 11 or (reservation.day.name.sunday? and reservation.timeslot.start.hour >10)  %>             
-                      <%= link_to 'Lesson', book_lesson_reservation_path(reservation),class: "btn btn-danger btn-lg btn-block"%>
+                      <%= link_to 'Lesson', book_lesson_reservation_path(reservation),class: "btn btn-danger btn-sm btn-block"%>
                     <% end %>
 
 
                     <% if @reservations[i+1].activity.name != 'Open' or (reservation.timeslot.start.hour <= 11 and !reservation.day.name.sunday?)    or (reservation.timeslot.start.hour <= 10 and reservation.day.name.sunday?)  %>                      
-                          <%= link_to 'Practice', book_practice_reservation_path(reservation),class: "btn btn-warning btn-lg btn-block" %>
+                          <%= link_to 'Practice', book_practice_reservation_path(reservation),class: "btn btn-warning btn-sm btn-block" %>
                     <% end %>
                   </td>
                 <% else %>
@@ -115,7 +124,7 @@
               <% if i.odd? %>
                 <% if ((@reservations[i-1].member != current_member) and (@count_reservations.to_i < 2) and current_member.membership.name != 'Operator') %>
                   <td>             
-                    <%= link_to 'Practice', book_practice_reservation_path(reservation),class: "btn btn-warning btn-lg btn-block" %>
+                    <%= link_to 'Practice', book_practice_reservation_path(reservation),class: "btn btn-warning btn-sm btn-block" %>
                   </td>
                 <% else %>
                   <td></td>
@@ -136,7 +145,7 @@
             <% else %>
               <td style = "border-right: 5px solid ">
             <% end %>
-                <%= reservation.activity.name %></td>
+                <%= reservation.activity.name[0] %></td>
           <% else %>
               <td style = "border-right: 5px solid "></td>
           <% end %>
