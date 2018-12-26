@@ -57,7 +57,7 @@
   <% serge = Member.find_by firstname: "Serge" %>
   <% if current_member == serge %>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle"  id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Membership Change</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Membership Change</a>
         <div class="dropdown-menu" aria-labelledby="dropdown03">
           <a class="dropdown-item">
             <%= link_to 'Operator', membership_to_operator_membership_path(current_member)%>
@@ -77,7 +77,7 @@
 
   <% if current_member.membership.name == 'Admin' %>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
         <div class="dropdown-menu" aria-labelledby="dropdown03">
           <a class="dropdown-item">
             <%= link_to reservations_path do %>
