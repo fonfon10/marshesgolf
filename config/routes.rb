@@ -39,7 +39,9 @@ Rails.application.routes.draw do
 
 
   resources :age_groups
-  #resources :members
+
+
+  resources :members
   devise_for :members
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

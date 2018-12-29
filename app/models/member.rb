@@ -4,6 +4,8 @@ class Member < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
+  validates_presence_of :firstname, :lastname, :email
+
 	belongs_to :membership
 	belongs_to :age_group
 	has_many :reservations
