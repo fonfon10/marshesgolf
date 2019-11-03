@@ -41,7 +41,12 @@ gem 'font-awesome-rails'
 gem 'activeadmin'
 
 # Plus integrations with:
-gem 'devise'
+#gem 'devise'
+
+
+gem "devise", ">= 4.6.0"
+
+
 gem 'cancan' # or cancancan
 gem 'draper'
 gem 'pundit'
